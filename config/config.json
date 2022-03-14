@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "didi",
+    "database": "swagger-api",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5400
+  },
+  "test": {
+    "username": "postgres",
+    "password": "didi",
+    "database": "swagger-api",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5400
+  },
+  "production": {
+    "username": "postgres",
+    "password": "didi",
+    "database": "swagger-api",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5400
+  }
+}
