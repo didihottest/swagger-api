@@ -21,7 +21,7 @@
       "description": "Development Server"
     },
     {
-      "url": "http://localhost:5000",
+      "url": "http://production.com",
       "description": "Production Server"
     }
   ],
@@ -91,6 +91,292 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get All Users",
+        "operationId": "getAllUsers",
+        "description": "Get All Users From Database",
+        "responses": {
+          "200": {
+            "description": "Successfully get Users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully get user data"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Data Is Empty",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User Data Is Empty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Some Error Message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{uuid}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get Users By UUID",
+        "operationId": "getUserByID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "Unique UUID of User",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "a2ee6c50-2fbb-4610-b2f5-6a9456725f23"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully get Users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully get user data"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User_Post"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Data Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User Data Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Some Error Message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Edit Users By UUID",
+        "operationId": "editUserByID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "Unique UUID of User",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "a2ee6c50-2fbb-4610-b2f5-6a9456725f23"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update Existing User Data",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Update_User_Body"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Update_User_Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully Update Users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User Successfully Updated"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Data Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User Data Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Some Error Message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete Users By UUID",
+        "operationId": "deleteUserByID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "Unique UUID of User",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "33f570e1-8961-417b-bf17-be1c11dc4bb1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully delete User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Data Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User Data Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Some Error Message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -101,13 +387,33 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "example": "Ninda"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "example": "ninda@email.com"
           },
           "role": {
-            "type": "string"
+            "type": "string",
+            "example": "editor"
+          }
+        }
+      },
+      "Update_User_Body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ninda"
+          },
+          "email": {
+            "type": "string",
+            "example": "ninda@email.com"
+          },
+          "role": {
+            "type": "string",
+            "example": "editor"
           }
         }
       },
@@ -137,21 +443,57 @@
           }
         }
       },
-      "Post": {
-        "required": ["title", "comment", "user_uuid"],
+      "User_Post": {
+        "required": ["name", "email", "role"],
         "type": "object",
         "properties": {
           "uuid": {
             "type": "string"
           },
-          "title": {
+          "name": {
             "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "post": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Post"
+            }
+          }
+        }
+      },
+      "Post": {
+        "required": ["title", "comment", "user_uuid"],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "example": "33f570e1-8961-417b-bf17-be1c11dc4bb1"
+          },
+          "title": {
+            "type": "string",
+            "example": "Some Title"
           },
           "content": {
-            "type": "string"
+            "type": "string",
+            "example": "Some Content"
           },
           "user_uuid": {
-            "type": "string"
+            "type": "string",
+            "example": "33f570e1-8961-417b-bf17-be1c11dc4bb1"
           },
           "created_at": {
             "type": "string",

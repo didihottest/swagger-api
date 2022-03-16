@@ -53,10 +53,16 @@ const GetUserById = async (req, res) => {
       include: ["post"]
     })
 
-    res.status(200).json({
-      message: `${userSelected.name} is Selected`,
-      data: userSelected
-    })
+    if (userSelected) {
+      res.status(200).json({
+        message: "Successfully get user data",
+        data: userSelected,
+      });
+    } else {
+      res.status(404).json({
+        message: "User Data Not Found"
+      });
+    }
 
   } catch (error) {
     return res.status(500).json({
@@ -80,7 +86,7 @@ const DeleteUser = async (req, res) => {
       })
     } else {
       res.status(404).json({
-        message: "user not found"
+        message: "User Data Not Found"
       })
     }
 
@@ -102,6 +108,12 @@ const EditUser = async (req, res) => {
         uuid: uuid
       }
     })
+
+    if (!user) {
+      res.status(404).json({
+        message: "User Data Not Found"
+      })
+    }
 
     if (name) {
       user.name = name

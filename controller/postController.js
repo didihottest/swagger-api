@@ -37,6 +37,7 @@ const GetPost = async (req, res) => {
   }
 }
 
+
 module.exports = {
   CreatePost,
   GetPost
